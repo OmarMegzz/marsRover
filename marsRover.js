@@ -1,4 +1,7 @@
-export const obstacles = [
+/*                                                   MARS ROVER                                                      */
+
+//        OBSTCALES
+const obstacles = [
   [1, 4],
   [3, 5],
   [7, 4],
@@ -13,7 +16,7 @@ export const Initializ = (x = 0, y = 0, dir = "N") => {
   return { x: x, y: y, direction: dir.toUpperCase() };
 };
 
-export const Rover = Initializ(3, 9);
+export const Rover = Initializ();
 
 //       FIND OBSTACLES
 
@@ -26,40 +29,6 @@ export const findObstacles = () => {
     }
   }
   return false;
-};
-
-//       ROTATE LEFT
-
-export const RotateLeft = () => {
-  if (Rover.direction === "N") {
-    Rover.direction = "W";
-  } else if (Rover.direction === "W") {
-    Rover.direction = "S";
-  } else if (Rover.direction === "S") {
-    Rover.direction = "E";
-  } else if (Rover.direction === "E") {
-    Rover.direction = "N";
-  } else {
-    console.log("This is not a direcrion");
-    return;
-  }
-};
-
-//       ROTATE RIGHT
-
-export const RotateRight = () => {
-  if (Rover.direction === "N") {
-    Rover.direction = "E";
-  } else if (Rover.direction === "E") {
-    Rover.direction = "S";
-  } else if (Rover.direction === "S") {
-    Rover.direction = "W";
-  } else if (Rover.direction === "W") {
-    Rover.direction = "N";
-  } else {
-    console.log("This is not a direcrion");
-    return;
-  }
 };
 
 //       MOVE  FORWARD
@@ -96,6 +65,40 @@ export const moveBackword = () => {
   }
 };
 
+//       ROTATE RIGHT
+
+export const RotateRight = () => {
+  if (Rover.direction === "N") {
+    Rover.direction = "E";
+  } else if (Rover.direction === "E") {
+    Rover.direction = "S";
+  } else if (Rover.direction === "S") {
+    Rover.direction = "W";
+  } else if (Rover.direction === "W") {
+    Rover.direction = "N";
+  } else {
+    console.log("This is not a direcrion");
+    return;
+  }
+};
+
+//       ROTATE LEFT
+
+export const RotateLeft = () => {
+  if (Rover.direction === "N") {
+    Rover.direction = "W";
+  } else if (Rover.direction === "W") {
+    Rover.direction = "S";
+  } else if (Rover.direction === "S") {
+    Rover.direction = "E";
+  } else if (Rover.direction === "E") {
+    Rover.direction = "N";
+  } else {
+    console.log("This is not a direcrion");
+    return;
+  }
+};
+
 //       MOVE ROVER
 
 export const moveRover = (commands) => {
@@ -115,10 +118,13 @@ export const moveRover = (commands) => {
       console.log("This is not a valid command");
       return "\n";
     }
+    if (findObstacles()) {
+      return Rover;
+    }
   }
   return Rover;
 };
 
-const newRover = moveRover("FFFFRLLBR");
+const newRover = moveRover("FFFLLBB");
 
 console.log(newRover);

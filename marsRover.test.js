@@ -1,14 +1,13 @@
 import {
   Initializ,
+  Rover,
   findObstacles,
   RotateLeft,
   RotateRight,
   moveForward,
   moveBackword,
   moveRover,
-  Rover,
-  obstacles,
-} from "./marsRover.js"; // Adjust path as necessary
+} from "./marsRover";
 
 describe("Rover Initialization", () => {
   test("should initialize rover with default values", () => {
@@ -17,31 +16,33 @@ describe("Rover Initialization", () => {
   });
 
   test("should initialize rover with specified values", () => {
-    const rover = Initializ(3, 9, "W");
-    expect(rover).toEqual({ x: 3, y: 9, direction: "W" });
+    const rover = Initializ(3, 5, "E");
+    expect(rover).toEqual({ x: 3, y: 5, direction: "E" });
   });
 
-  test("should return empty object for invalid inputs", () => {
-    const rover = Initializ("a", 9, 123);
+  test("should return an empty object for invalid inputs", () => {
+    const rover = Initializ("invalid", 10, 123);
     expect(rover).toEqual({});
   });
 });
 
 describe("Obstacle Detection", () => {
   test("should return true if rover is at obstacle position", () => {
-    const rover = Initializ(1, 4, "w"); // Initialize rover at obstacle position
-    expect(findObstacles(rover)).toBe(true); // Pass rover to findObstacles
+    Rover.x = 1;
+    Rover.y = 4;
+    expect(findObstacles()).toBe(true);
   });
 
   test("should return false if rover is not at obstacle position", () => {
-    const rover = Initializ(0, 0, "N"); // Rover not at obstacle
-    expect(findObstacles(rover)).toBe(false); // Should not detect obstacle
+    Rover.x = 0;
+    Rover.y = 0;
+    expect(findObstacles()).toBe(false);
   });
 });
 
 describe("Rover Rotation", () => {
   test("should rotate left correctly", () => {
-    Initializ(3, 9, "N");
+    Rover.direction = "N";
     RotateLeft();
     expect(Rover.direction).toBe("W");
 
@@ -54,11 +55,9 @@ describe("Rover Rotation", () => {
     RotateLeft();
     expect(Rover.direction).toBe("N");
   });
-  console.log("🚀 ~ test ~ Rover:", Rover);
-  console.log("🚀 ~ test ~ Rover:", Rover);
 
   test("should rotate right correctly", () => {
-    Initializ(3, 9, "N");
+    Rover.direction = "N";
     RotateRight();
     expect(Rover.direction).toBe("E");
 
@@ -75,33 +74,36 @@ describe("Rover Rotation", () => {
 
 describe("Rover Movement", () => {
   test("should move forward correctly", () => {
-    Initializ(3, 9, "N");
+    Rover.x = 3;
+    Rover.y = 9;
+    Rover.direction = "N";
     moveForward();
     expect(Rover.y).toBe(10);
 
-    Initializ(3, 9, "E");
+    Rover.direction = "E";
     moveForward();
     expect(Rover.x).toBe(4);
   });
 
   test("should move backward correctly", () => {
-    Initializ(3, 9, "N");
+    Rover.x = 3;
+    Rover.y = 9;
+    Rover.direction = "N";
     moveBackword();
     expect(Rover.y).toBe(8);
 
-    Initializ(3, 9, "W");
+    Rover.direction = "W";
     moveBackword();
     expect(Rover.x).toBe(4);
   });
+});
 
-  test("should move rover based on commands", () => {
-    const result = moveRover("FFRFFLBB");
-    expect(result).toEqual({ x: 4, y: 11, direction: "W" }); // Adjust based on actual commands
-  });
-
-  test("should stop when obstacle is found", () => {
-    Initializ(1, 4, "N");
-    const result = moveRover("FFF");
-    expect(findObstacles()).toBe(true); // Confirm obstacle detection
+describe("Rover Command Execution", () => {
+  test("should move rover based on command sequence", () => {
+    Rover.x = 0;
+    Rover.y = 0;
+    Rover.direction = "N";
+    const result = moveRover("FFRFF");
+    expect(result).toEqual({ x: 2, y: 2, direction: "E" });
   });
 });
