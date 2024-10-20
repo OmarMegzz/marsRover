@@ -121,7 +121,7 @@ export const moveRover = (commands) => {
       return "\n";
     }
     if (findObstacles()) {
-      return `this an obstacle at (${Rover.x},${Rover.y}) facing ${Rover.direction}`;
+      return `(${Rover.x},${Rover.y}) ${Rover.direction} STOPPED`;
     }
   }
   return Rover;
