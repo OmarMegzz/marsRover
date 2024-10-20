@@ -58,7 +58,7 @@ export const moveBackword = () => {
   } else if (Rover.direction === "W") {
     Rover.x = Rover.x + 1;
   } else if (Rover.direction === "S") {
-    Rover.x = Rover.x + 1;
+    Rover.y = Rover.y + 1;
   } else if (Rover.direction === "E") {
     Rover.x = Rover.x - 1;
   } else {
@@ -127,6 +127,6 @@ export const moveRover = (commands) => {
   return Rover;
 };
 
-const newRover = moveRover("FFFLBRF");
+const newRover = moveRover("FFFFBRF");
 
 console.log(newRover);
