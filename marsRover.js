@@ -1,13 +1,14 @@
 /*                                                   MARS ROVER                                                      */
 
-//        OBSTCALES
+//------------- OBSTCALES -------------------
+
 const obstacles = [
   [1, 4],
   [3, 5],
   [7, 4],
 ];
 
-//       INITIALIZ
+//------------- INITIALIZ -------------------
 
 export const Initializ = (x = 0, y = 0, dir = "N") => {
   if (isNaN(x) || isNaN(y) || typeof dir !== "string") {
@@ -18,7 +19,7 @@ export const Initializ = (x = 0, y = 0, dir = "N") => {
 
 export const Rover = Initializ();
 
-//       FIND OBSTACLES
+//------------- FIND OBSTACLES -------------------
 
 export const findObstacles = () => {
   for (let obstacle of obstacles) {
@@ -31,7 +32,8 @@ export const findObstacles = () => {
   return false;
 };
 
-//       MOVE  FORWARD
+//
+//------------- MOVE  FORWARD -------------------
 
 export const moveForward = () => {
   if (Rover.direction === "N") {
@@ -48,7 +50,7 @@ export const moveForward = () => {
   }
 };
 
-//       MOVE BACKWORD
+//------------- MOVE  BACKWORD -------------------
 
 export const moveBackword = () => {
   if (Rover.direction === "N") {
@@ -65,7 +67,7 @@ export const moveBackword = () => {
   }
 };
 
-//       ROTATE RIGHT
+//-------------  ROTATE RIGHT -------------------
 
 export const RotateRight = () => {
   if (Rover.direction === "N") {
@@ -82,7 +84,7 @@ export const RotateRight = () => {
   }
 };
 
-//       ROTATE LEFT
+//-------------  ROTATE LEFT -------------------
 
 export const RotateLeft = () => {
   if (Rover.direction === "N") {
@@ -99,7 +101,7 @@ export const RotateLeft = () => {
   }
 };
 
-//       MOVE ROVER
+//-------------  MOVE ROVER -------------------
 
 export const moveRover = (commands) => {
   for (let command of [...commands]) {
