@@ -121,12 +121,12 @@ export const moveRover = (commands) => {
       return "\n";
     }
     if (findObstacles()) {
-      return Rover;
+      return `this an obstacle at (${Rover.x},${Rover.y}) facing ${Rover.direction}`;
     }
   }
   return Rover;
 };
 
-const newRover = moveRover("FFFLLBB");
+const newRover = moveRover("FFFLBRF");
 
 console.log(newRover);
